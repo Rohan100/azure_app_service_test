@@ -27,6 +27,11 @@ app.get('/health', (req, res) => {
   res.json({ status: 'healthy' });
 });
 
+// Check Azure/local secret configuration without exposing the secret over HTTP.
+app.get('/secret', (req, res) => {
+  res.json({ secretConfigured: Boolean(process.env.secret) });
+});
+
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
 

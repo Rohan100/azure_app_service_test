@@ -53,6 +53,20 @@ curl http://localhost:3000/health
 { "status": "healthy" }
 ```
 
+### `GET /secret`
+
+Checks whether the `secret` environment variable is configured and returns only a boolean. It deliberately does not send the secret value to the caller, because an unauthenticated HTTP endpoint would expose it to anyone who can reach the app.
+
+```bash
+curl http://localhost:3000/secret
+```
+
+```json
+{ "secretConfigured": false }
+```
+
+For local learning, set `secret=some-test-value` in your untracked `.env` file, restart the app, and call the endpoint again. For Azure, add an application setting named `secret` in **Settings → Environment variables** (or **Configuration**) and save. Do not commit `.env` or include the secret value in source code or logs.
+
 ### `GET /products`
 
 Returns all products with ID, name, price, category, and stock quantity.
